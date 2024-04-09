@@ -1,0 +1,40 @@
+ExpressJS
+-> một framework được cung cấp từ thư viện Express
+
+- Buổi 1:
+Cách CRUD, chưa có chuẩn hoá
+
+ExpressJS sẽ cung cấp các phương thức và rule theo REST API
+
+truyền dữ liệu từ client lên server
+- query params: nếu không truyền lên, thì object này sẽ là object rỗng -> tất cả các value bên trong là undefined
+
+-> GET: liên quan đến lấy dữ liệu
+        - Có nhiều kiểu lấy dữ liệu
+            + Lấy ra tất cả
+            + Lấy ra tất cả nhưng có điều kiện
+            + Lấy theo id của dữ liệu
+                /students/:id  :  sau dấu / mà có : thì cái đoạn text sau :  là tên trường cần xử lý
+
+-> POST: liên quan việc thêm dữ liệu vào resource
+        - sẽ không được phép truyền điều kiện gì lên cả, api endpoint giữ nguyên
+
+
+-> PUT: liên quan tới tác vụ cập nhật dữ liệu cụ thể
+        - Yêu cầu:
+            1. Cung cấp id dữ liệu cần cập nhật | truyền theo params
+            2. Cung cấp thông tin cập nhật của dữ liệu hiện tại | truyền theo body
+
+
+
+-> DELETE: liên quan tới tác vụ xoá dữ liệu cụ thể
+        - Yêu cầu:
+            + Cung cấp id dữ liệu cần xoá trên params
+
+
+
+
+-> Kiến thức cần nắm:
+
+Biết cách khởi tạo server với ExpressJS
+RESTful API
