@@ -1,0 +1,5 @@
+- Client - server là gì
+
+- Method là gì
+
+- API, endpoint là gì

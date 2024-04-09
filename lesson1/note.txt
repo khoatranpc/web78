@@ -1,0 +1,5 @@
+-> cách khởi tạo dự án với npm
+-> file path
+-> module js
+
+-> khởi tạo server, REST API
