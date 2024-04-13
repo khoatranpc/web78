@@ -1,0 +1,25 @@
+200: OK
+201: Created -> tạo thành công | cập nhật thành công -> nói chung về việc thay đổi dữ liệu thay đổi thành công
+
+=========
+
+401: Unauthorized -> không được xác thực thông tin người dùng có 'thật hay không'
+403: Forbidden -> kiểm soát việc được phép truy cập thông tin gì đó từ người dùng đã được xác thực
+
+
+
+======
+
+500: Internal server error -> lỗi liên quan nội bộ của server nói chung
+
+
+
+
+>>>>>>>>>>>============<<<<<<<<<<
+
+
+cách sử dụng json-server và làm việc với json-server theo chuẩn REST API
+
+nắm bắt cách sử dụng và tác dụng của mã trạng thái (status code)
+
+Sử dụng try catch để bắt, xử lý lỗi ngoại lệ
