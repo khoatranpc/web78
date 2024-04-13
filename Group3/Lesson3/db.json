@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "US001",
+      "userName": "MindX"
+    },
+    {
+      "id": "US002",
+      "useName": "Nobi Nobita"
+    },
+    {
+      "id": "US457ae164-a160-4d20-9e19-da954dabddad",
+      "userName": "khoapc"
+    }
+  ],
+  "posts": [
+    {
+      "id": "PS001",
+      "content": "Nội dung học về JSON Server!",
+      "authorId": "US001"
+    },
+    {
+      "id": "PSc6a951ca-08ba-4149-a30b-648c31adae65",
+      "content": "I miss you so much!",
+      "authorId": "US457ae164-a160-4d20-9e19-da954dabddad"
+    }
+  ],
+  "comments": [
+    {
+      "id": "CMT001",
+      "postId": "PS001",
+      "content": "Bài học này rất ý nghĩa! Cảm ơn MindX!",
+      "authorId": "US002"
+    }
+  ]
+}

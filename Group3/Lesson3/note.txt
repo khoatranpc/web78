@@ -1,0 +1,62 @@
+Yêu cầu 4: Viết API cho phép user được comment vào bài post
+
+Việc comment tức là, tạo ra mới một dữ liệu comment
+
+-> phải biết được postId, authorId, content (nội dung của comment)
+
+-> khi tạo cmt thì chỉ việc có đủ các dữ liệu trên rồi thêm vào resource
+
+
+Yêu cầu 6: Lấy tất cả cmt của một bài post
+
+để lấy được 1 bài post -> truyền id params:  /post/:id
+
+-> khi đã lấy được bài post rồi, 
+thực hiện lấy tất cả các comment  /comments
+lọc các comment tương ứng với id của bài post đã lấy  -> dùng phương thức filter
+
+
+Yêu cầu 7: Viết API lấy tất cả các bài post, 3 comment đầu (dựa theo index) của tất cả user .
+
+
+lấy tất cả bài post ra -> /posts
+
+thực hiện lấy tất cả các comment  /comments
+
+slice
+
+mapping ->  {
+      "id": "PS001",
+      "content": "Nội dung học về JSON Server!",
+      "authorId": "US001",
+      comments: [
+        {
+
+        },
+        {
+            
+        },
+        {
+
+        },
+      ]
+},
+
+Yêu cầu 8: Viết API lấy một bài post và tất cả comment của bài post đó thông qua postId
+
+{
+      "id": "PS001",
+      "content": "Nội dung học về JSON Server!",
+      "authorId": "US001",
+      comments: [
+        {
+
+        },
+        {
+            
+        },
+        {
+
+        },
+      ]
+}
