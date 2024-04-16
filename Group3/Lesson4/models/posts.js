@@ -9,6 +9,6 @@ const postSchema = new mongoose.Schema({
 
 // định nghĩa model
 
-const PostModel = mongoose.model('comments', postSchema);
+const PostModel = mongoose.model('posts', postSchema);
 
 export default PostModel;
