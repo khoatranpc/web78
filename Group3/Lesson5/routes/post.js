@@ -25,6 +25,8 @@ const middlewareUpdatePost = (req, res, next) => {
         });
     }
 }
+PostRouter.get('', postController.getAllPost);
 PostRouter.post('', postController.createPost);
 PostRouter.put('/:id', middlewareUpdatePost, postController.updatePost);
+
 export default PostRouter;

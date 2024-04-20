@@ -1,5 +1,6 @@
 import UserModel from '../models/users.js';
 import PostModel from '../models/posts.js';
+import CommentModel from '../models/comments.js';
 
 const postController = {
     createPost: async (req, res) => {
@@ -59,6 +60,42 @@ const postController = {
             })
         } catch (error) {
             res.status(error.status ?? 403).send({
+                data: null,
+                message: error.message,
+                success: false
+            });
+        }
+    },
+    getAllPost: async (req, res) => {
+        try {
+            const listPost = await PostModel.find();
+            // thực hiện lấy tất cả các comment với các id của listPost
+            // thực hiện duyệt danh sách listPost và trả về 1 mảng id
+            const listId = listPost.map((post) => post._id.toString());
+
+            // thực hiện đồng thời lấy tất cả comment cho từng postId
+            const listComment = [];
+            listId.forEach((postId) => {
+                const cmts = CommentModel.find({
+                    postId: postId
+                }).limit(3);
+                listComment.push(cmts);
+            });
+            const result = await Promise.all(listComment).then((value) => {
+                return {
+                    posts: listPost.map((post, idx) => {
+                        return {
+                            ...post.toObject(),
+                            comments: value[idx]
+                        }
+                    })
+                }
+            });
+            res.status(200).send({
+                data: result,
+            });
+        } catch (error) {
+            res.status(error.status ?? 500).send({
                 data: null,
                 message: error.message,
                 success: false
