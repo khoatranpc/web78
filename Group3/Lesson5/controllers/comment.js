@@ -1,3 +1,7 @@
+import UserModel from '../models/users.js';
+import CommentModel from '../models/comments.js';
+import PostModel from '../models/posts.js';
+
 const commentController = {
     createComment: async (req, res) => {
         try {

@@ -1,3 +1,6 @@
+import UserModel from '../models/users.js';
+import PostModel from '../models/posts.js';
+
 const postController = {
     createPost: async (req, res) => {
         try {
@@ -23,6 +26,37 @@ const postController = {
                 success: true
             });
 
+        } catch (error) {
+            res.status(error.status ?? 403).send({
+                data: null,
+                message: error.message,
+                success: false
+            });
+        }
+    },
+    updatePost: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { authorId, content } = req.body;
+            const crrPost = await PostModel.findById(id);
+            if (!crrPost) throw {
+                message: 'Không tìm thấy bài Post!'
+            }
+            const crrUser = await UserModel.findById(authorId);
+            if (!crrUser) throw {
+                message: 'Không tìm thấy thông tin người tạo bài!'
+            }
+            // so sánh authorId và authorId từ bài post -> xem xem có trùng khớp k?
+            if (authorId !== crrPost.authorId) throw {
+                message: 'Bạn không có quyền chỉnh sửa!'
+            }
+            crrPost.content = content;
+            await crrPost.save();
+            res.status(201).send({
+                data: crrPost,
+                message: 'Thành công',
+                success: true
+            })
         } catch (error) {
             res.status(error.status ?? 403).send({
                 data: null,

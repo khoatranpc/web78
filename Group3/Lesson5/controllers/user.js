@@ -1,15 +1,9 @@
+import UserModel from '../models/users.js';
+
 const userController = {
     createUser: async (req, res) => {
         try {
-            const { userName, email } = req.body;
-            if (!userName) throw {
-                message: 'userName is required!',
-                status: 403
-            }
-            if (!email) throw {
-                message: 'email is required!',
-                status: 403
-            }
+            const { email } = req.body;
             // kiểm tra tồn tại email
             const existedEmail = await UserModel.findOne({ email });
             if (existedEmail) throw new Error("Email has been existed!");
@@ -26,7 +20,7 @@ const userController = {
                 success: false
             });
         }
-    }
+    },
 }
 
 export default userController;
