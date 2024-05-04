@@ -6,3 +6,47 @@ D + B => C
 
 => A = D -> người dùng nhập mật khẩu đúng
 key log
+
+
+
+
+
+Viết 3 API
+
+/register
+/login
+
+/reset-password ???????
+
+NV1:
+Thực hiện gửi mã về email.
+Yêu cầu người dùng gửi mã này lại cho hệ thống (server)
+Server thực hiện kiểm tra mã có hợp lệ không? (valid)
+Nếu hợp lệ -> chuyển qua phần thay đổi mật mà không yêu cầu nhập mật khẩu cũ
+
+Backend sẽ làm những thao tác gì?
+
+- database phải có mã sẵn sàng để gửi về hoặc sử dụng biến global (toàn cục cho dự án)
+mỗi khi người dùng gửi yêu cầu nhận mã -> trả mã mới về đồng thời lưu thông tin tài khoản yêu cầu mã và mà lại trong biến này
+- thực hiện gọi api gửi code, mật khẩu mới -> cập nhật mật khẩu mới
+
+NV2:
+Thực hiện đổi mật khẩu bình thường
+-> gửi cả email
+-> gửi mật khẩu cũ lên
+-> mật khẩu mới (newPassword) và xác thực mật khẩu (confirmPassword)
+
+
+- so sánh
+mật khẫu cũ có trùng khớp không? -> nếu không trùng khớp thì phải trả về thông báo: mật khẩu cũ không khớp
+-> nếu khớp: 
+    + so sánh newPassword và confirmPassword xem có khớp nhau hay không
+    -> nếu khớp -> thực hiện logic tạo mật khẩu mới
+    -> nếu không khớp -> trả về thông báo: mật khẩu mới không trùng khớp
+
+
+Cả 2 NV đều dùng chung /reset-password
+
+chỉ khác là để sử dụng tương ứng nghiệp vụ -> cần phải có 1 thông tin gì đó để biết được khi nào dùng nghiệp vụ nào
+
+-> query params
