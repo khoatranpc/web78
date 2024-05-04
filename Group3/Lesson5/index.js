@@ -6,11 +6,6 @@ await mongooose.connect('mongodb+srv://khoatranpc603:khoapc@web78-fullstack.rmaa
 const app = express();
 app.use(express.json());
 
-app.get('/users', (req, res) => {
-    res.send({
-        data: {}
-    })
-});
 app.use('/api/v1', rootRouterV1);
 
 

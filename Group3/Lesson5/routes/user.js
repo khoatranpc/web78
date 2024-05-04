@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userController from "../controllers/user.js";
+import { authMiddleware } from "../middlewares/auth.js";
 
 const validateCreateUser = (req, res, next) => {
     try {
@@ -24,5 +25,7 @@ const validateCreateUser = (req, res, next) => {
 const UserRouter = Router();
 
 //   /users
+UserRouter.get('', authMiddleware.authentication, authMiddleware.authorizationAdmin, userController.getUser);
+UserRouter.get('/:id', authMiddleware.authentication, userController.getUserById);
 UserRouter.post('', validateCreateUser, userController.createUser);
 export default UserRouter;

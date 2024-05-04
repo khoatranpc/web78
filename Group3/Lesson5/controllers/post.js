@@ -38,18 +38,16 @@ const postController = {
     updatePost: async (req, res) => {
         try {
             const { id } = req.params;
-            const { authorId, content } = req.body;
+            const { role, userId } = req;
+            const { content } = req.body;
             const crrPost = await PostModel.findById(id);
             if (!crrPost) throw {
                 message: 'Không tìm thấy bài Post!'
             }
-            const crrUser = await UserModel.findById(authorId);
-            if (!crrUser) throw {
-                message: 'Không tìm thấy thông tin người tạo bài!'
-            }
-            // so sánh authorId và authorId từ bài post -> xem xem có trùng khớp k?
-            if (authorId !== crrPost.authorId) throw {
-                message: 'Bạn không có quyền chỉnh sửa!'
+            if (role === 'USER' && userId !== crrPost.authorId) {
+                throw {
+                    message: 'Bạn không thể thực hiện hành động!'
+                }
             }
             crrPost.content = content;
             await crrPost.save();
@@ -74,6 +72,11 @@ const postController = {
             const listId = listPost.map((post) => post._id.toString());
 
             // thực hiện đồng thời lấy tất cả comment cho từng postId
+            // ý tưởng
+            /**
+             * Sau khi có được danh sách id của các bài post
+             * -> thực hiện tìm kiếm comments theo từng id trong danh sách
+             */
             const listComment = [];
             listId.forEach((postId) => {
                 const cmts = CommentModel.find({
@@ -81,6 +84,8 @@ const postController = {
                 }).limit(3);
                 listComment.push(cmts);
             });
+            // Promise.all -> là một phương thức giúp thực hiện đồng thời nhiều logic bất đồng bộ cùng 1 lúc
+            //              -> thời gian trả ra kết qua của tất cả promise trong đó, sẽ là thời gian chậm nhất của promise nào đó
             const result = await Promise.all(listComment).then((value) => {
                 return {
                     posts: listPost.map((post, idx) => {
@@ -103,5 +108,9 @@ const postController = {
         }
     }
 }
-
+/**
+ * Tạo, chỉnh sửa bài post
+ * chỉ user là người tạo hoặc admin thì mới được phép chỉnh sửa hoặc xoá bài post
+ * 
+ */
 export default postController;

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import postController from "../controllers/post.js";
+import { authMiddleware } from '../middlewares/auth.js';
 
 const PostRouter = Router();
 
@@ -9,10 +10,7 @@ const middlewareUpdatePost = (req, res, next) => {
         if (!id) throw {
             message: 'Chưa cung cấp id bài post!'
         }
-        const { authorId, content } = req.body;
-        if (!authorId) throw {
-            message: 'Chưa cung cấp authorId!'
-        }
+        const { content } = req.body;
         if (!content) throw {
             message: 'Chưa cung cấp content!'
         }
@@ -27,6 +25,6 @@ const middlewareUpdatePost = (req, res, next) => {
 }
 PostRouter.get('', postController.getAllPost);
 PostRouter.post('', postController.createPost);
-PostRouter.put('/:id', middlewareUpdatePost, postController.updatePost);
+PostRouter.put('/:id', authMiddleware.authentication, middlewareUpdatePost, postController.updatePost);
 
 export default PostRouter;
