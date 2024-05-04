@@ -6,7 +6,12 @@ import mongoose from 'mongoose';
 // 4 thao tác cơ bản: CRUD -> dữ liệu chính gốc -> xử lý logic bên controller
 const userSchema = new mongoose.Schema({
     userName: String,
-    email: String,
+    email: {
+        type: String,
+        unique: true
+    },
+    password: String,
+    salt: String
 });
 
 // định nghĩa model
