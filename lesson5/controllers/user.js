@@ -1,6 +1,7 @@
 import { verifyCodes } from '../global.js';
 import UserModel from '../models/user.js';
 import bcrypt from 'bcrypt';
+import { token } from '../utils/index.js';
 
 const userController = {
     getAllUser: async (req, res) => {
@@ -51,8 +52,13 @@ const userController = {
             delete dataResponse.password;
             delete dataResponse.salt;
 
+            const tk = token.generateToken({
+                email: crrUser.email,
+                _id: crrUser._id
+            });
+
             res.status(200).send({
-                data: dataResponse
+                data: tk
             });
         } catch (error) {
             res.status(401).send({
@@ -143,6 +149,22 @@ const userController = {
             res.status(200).send({
                 data: newCode.code,
                 message: 'Thời gian sử dụng mã là 3 phút!'
+            });
+        } catch (error) {
+            res.status(401).send({
+                message: error.message
+            });
+        }
+    },
+    getOneUser: async (req, res) => {
+        try {
+            const { id } = req.params;
+            console.log(req.dataToken);
+            const crrUser = await UserModel.findById(id);
+            if (!crrUser) throw new Error('Không tồn tại thông tin người dùng!');
+            res.status(200).send({
+                data: crrUser,
+                message: 'Thành công'
             });
         } catch (error) {
             res.status(401).send({
