@@ -1,15 +1,22 @@
 import mongoose from 'mongoose';
+import { CollectionDatabase } from '../config.js';
 
 // định nghĩa schema -> định nghĩa khuôn giữ liệu
 // đơn giản nhất là định nghĩa dữ liệu và kiểu dữ liệu
 const commentSchema = new mongoose.Schema({
-    postId: String,
+    postId: {
+        type: mongoose.Types.ObjectId,
+        ref: CollectionDatabase.POSTS
+    },
     content: String,
-    authorId: String
+    authorId: {
+        type: mongoose.Types.ObjectId,
+        ref: CollectionDatabase.USERS
+    }
 });
 
 // định nghĩa model
 
-const CommentModel = mongoose.model('comments', commentSchema);
+const CommentModel = mongoose.model(CollectionDatabase.COMMENTS, commentSchema);
 
 export default CommentModel;

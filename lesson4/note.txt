@@ -1,2 +1,8 @@
 CRUD
 -> Thêm, đọc, cập nhật, xoá
+
+
+==== Thực hành lesson 9
+
+
+viết API lấy các comment của một bài post và người đã tạo ra comment của từng comment đó

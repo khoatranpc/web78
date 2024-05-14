@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { CollectionDatabase } from '../config.js';
 
 // định nghĩa schema -> định nghĩa khuôn giữ liệu
 // đơn giản nhất là định nghĩa dữ liệu và kiểu dữ liệu
@@ -9,6 +10,6 @@ const userSchema = new mongoose.Schema({
 
 // định nghĩa model
 
-const UserModel = mongoose.model('users', userSchema);
+const UserModel = mongoose.model(CollectionDatabase.USERS, userSchema);
 
 export default UserModel;

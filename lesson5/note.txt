@@ -1,0 +1,13 @@
+Câu 1: Ở API reset password (đổi mật khẩu trong tình trạng vẫn nhớ mật khẩu cũ)
+    Cập nhật API này với yêu cầu
+    Sử dụng token để xác thực yêu cầu
+Yêu cầu:
+    Token hợp lệ
+    Token này phải trùng với id của user cần reset password (chỉ có tài khoản của tôi mới được phép thay đổi mật khẩu của tôi)
+
+Câu số 2: Thực hành viết Api /api/v1/re-verify (api này có tác dụng cấp mới Access token với refreshtoken)
+
+- Khi ĐN, phải trả về 2 loại token là Access token và refreshtoken
+
+- đối với API trên, thì chỉ nhận đầu vào là refreshtoken, nếu gửi AT lên thì lập tức báo lỗi: Không thể xác thực
+nếu RFT hợp lệ -> trả về 1 Access Token mới, và thử sử dụng token này để dùng cho api của câu 1

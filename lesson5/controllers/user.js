@@ -52,13 +52,22 @@ const userController = {
             delete dataResponse.password;
             delete dataResponse.salt;
 
-            const tk = token.generateToken({
+            const tkAt = token.generateToken({
                 email: crrUser.email,
-                _id: crrUser._id
+                _id: crrUser._id,
+                tokenType: 'AT'
             });
+            const tkRf = token.generateToken({
+                email: crrUser.email,
+                _id: crrUser._id,
+                tokenType: 'RT'
+            }, 1000 * 60 * 60 * 2);
 
             res.status(200).send({
-                data: tk
+                data: {
+                    accessToken: tkAt,
+                    refreshToken: tkRf
+                }
             });
         } catch (error) {
             res.status(401).send({
@@ -70,11 +79,10 @@ const userController = {
         try {
             const { email, password, confirmNewPassword, newPassword, verifyCode } = req.body;
             // kiểm tra tồn tại tài khoản
-            const crrUser = await UserModel.findOne({ email });
+            const crrUser = await UserModel.findOne({ email, _id: req.dataToken._id });
             if (!crrUser) throw {
                 message: 'Không tồn tại người dùng!'
             }
-            // thực hiện kiểm tra mật khẩu cũ
             if (verifyCode) {
                 // kiểm tra verify code
                 const checked = verifyCodes.findIndex((item) => {

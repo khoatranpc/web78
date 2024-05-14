@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import UserModel from './models/users.js';
+import PostModel from './models/posts.js';
+import CommentModel from './models/comments.js';
 
 await mongoose.connect('mongodb+srv://khoatranpc603:khoapc@web78-fullstack.rmaaizp.mongodb.net/learnmg?retryWrites=true&w=majority&appName=Web78-Fullstack');
 const app = express();
@@ -54,6 +56,18 @@ app.get('/api/v1/users/:id', async (req, res) => {
         data: crrUser,
         message: 'Successful!',
         success: true
+    });
+});
+
+app.get('/api/v1/posts/:id', async (req, res) => {
+    const { id } = req.params;
+    const crrPost = await PostModel.findById(id);
+    const listComment = await CommentModel.find({
+        postId: id
+    }).populate('authorId');
+    res.status(200).send({
+        data: crrPost,
+        listComment
     });
 });
 

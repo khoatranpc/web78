@@ -4,10 +4,10 @@ import jwt from 'jsonwebtoken';
 const secretKey = 'mysecretkey';
 // token gửi lên: Bearer token.....
 const token = {
-    generateToken: (userData) => {
+    generateToken: (userData, timeExpiresIn) => {
         return jwt.sign(userData, secretKey, {
             // thời gian hết hạn (tính theo milisecond) 1s=1000ml
-            expiresIn: '1h'
+            expiresIn: timeExpiresIn ?? 1000 * 60 * 5
         });
     },
     verifyToken: (token) => {

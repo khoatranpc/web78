@@ -1,0 +1,22 @@
+Sách (books)
+
+
+Tác giả, Nhà sáng tác (Người sáng tác sách) (author)
+
+
+- Một tác giả có thể có (sáng tác) nhiều cuốn sách
+- Một cuốn sách thì chỉ có thể được tạo (sáng tác) bởi một tác giả
+Quan hệ 1 - n (one to many)
+
+-> Cũng cần phải 'khai báo' cho các dữ liệu rằng nó có quan hệ với dữ liệu nào đó (hay mối liên kết giữa các dữ liệu với nhau)
+
+
+Dữ liệu sẽ cần phải có sự phụ thuộc
+
+
+A -> B
+
+Phải có dữ liệu A thì mới có B  
+
+vậy lúc này khi thiết kế, trường tham chiếu sẽ nằm ở B, còn A thì không cần tham chiếu
+Muốn có nhiều sự phụ thuộc, C D B, thì chỉ cần thêm tham chiếu vào chúng
